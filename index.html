@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/cooltipz-css/cooltipz.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon-icon.png" />
+    <title>Customer Care Registry</title>
+  </head>
+  <body>
+    <div class="signup-page" id="logo-section">
+      <div class="logo-section">
+        <div class="logo">
+          <i class="fa fa-light fa-clipboard-list logo-icon"></i>
+          Customer Care Registry
+        </div>
+      </div>
+      <div class="signup-box hide-signup" id="signup-page">
+        <div id="snackbar" class="snackbar">
+          User Already Exists.. Try Signingup with another E-Mail
+          <button class="snackbar-close" id="snackbar-close">X</button>
+        </div>
+        <h1 class="sign-up">Sign Up</h1>
+        <h4 class="sign-up slogan">
+          It's completely free and takes only a minute
+        </h4>
+        <div class="signup-form">
+          <label for="username" class="user-details">Name</label>
+          <input
+            type="text"
+            placeholder=""
+            id="username"
+            class="form-input"
+            minlength="5"
+            maxlength="15"
+            spellcheck="false"
+          />
+          <label for="user-email" class="user-details">E-Mail </label>
+          <input
+            type="email"
+            placeholder=""
+            id="user-email"
+            class="form-input"
+            spellcheck="false"
+          />
+          <label for="user-types" class="user-details user-type"
+            >User Type</label
+          >
+          <div class="user-type-box">
+            <div class="form-input custom-select" id="user-types-box">
+              <p id="user-types">Select User Type...</p>
+              <p>
+                <i class="fa fa-sharp fa-solid fa-sort-down"></i>
+              </p>
+            </div>
+            <div>
+              <ul class="user-type-options" id="user-type-options">
+                <li class="options" onclick="writeToSelect('Student')">
+                  Student
+                </li>
+                <li class="options" onclick="writeToSelect('Professional')">
+                  Professional
+                </li>
+              </ul>
+            </div>
+          </div>
+          <label for="password" class="user-details">Password </label>
+          <div class="password-container">
+            <input
+              type="password"
+              placeholder=""
+              id="password"
+              class="form-input password-field"
+              minlength="8"
+              maxlength="15"
+              autocomplete="off"
+              onclick="passwordValidation()"
+            /><i class="fa fa-eye eye-button" id="password-eye"></i>
+          </div>
+          <div class="password-requirement">
+            Password Requirements :
+            <ul>
+              <li>Minimum 8 and Maximum 15 characters</li>
+              <li>Atleast 1 special character,1 alphabet,1 number</li>
+            </ul>
+          </div>
+          <label for="confirm-password" class="user-details"
+            >Confirm Password
+          </label>
+          <div class="password-container">
+            <input
+              type="password"
+              placeholder=""
+              id="confirm-password"
+              class="form-input password-field"
+              minlength="8"
+              maxlength="15"
+              autocomplete="off"
+              onclick="passwordValidation()"
+            />
+            <i
+              class="fa fa-eye eye-button"
+              id="confirm-password-eye"
+              aria-hidden="true"
+            ></i>
+          </div>
+        </div>
+        <div class="mandatory-message">* Mandatory fields</div>
+        <input
+          type="Submit"
+          value="Sign Up"
+          class="signup-button"
+          id="signup-button"
+          onclick="signupValidation()"
+        />
+        <p class="user-login">
+          Already have an account ?
+          <a class="user-login-redirect" onclick="redirectLoginPage()"
+            >Login Here</a
+          >
+        </p>
+      </div>
+      <div class="signup-box login-box" id="login-page">
+        <div id="login-snackbar" class="snackbar">
+          SignUp successful. Login to Continue
+          <button class="snackbar-close" id="login-snackbar-close">X</button>
+        </div>
+        <div id="login-snackbar-failed" class="snackbar">
+          Invalid Credentials. Please check email or Password
+          <button class="snackbar-close" id="login-snackbar-failed-close">
+            X
+          </button>
+        </div>
+        <div id="login-snackbar-notfound" class="snackbar login-wrong-snackbar">
+          User Not Found.. SignUp to continue
+          <button class="snackbar-close" id="login-snackbar-failed-notfound">
+            X
+          </button>
+        </div>
+        <h1 class="sign-up">Login</h1>
+        <div class="signup-form login-form">
+          <label for="login-email" class="user-details">User E-Mail </label>
+          <input
+            type="email"
+            placeholder=""
+            id="login-email"
+            class="form-input"
+          />
+          <label for="login-password" class="user-details">Password </label>
+          <div class="password-container">
+            <input
+              type="password"
+              placeholder=""
+              id="login-password"
+              class="form-input password-field"
+              maxlength="15"
+              autocomplete="off"
+              onclick="passwordValidation()"
+            /><i class="fa fa-eye eye-button" id="login-password-eye"></i>
+          </div>
+        </div>
+        <div class="mandatory-message">* Mandatory fields</div>
+        <input
+          type="Submit"
+          value="Login"
+          class="signup-button login-button"
+          id="login-button"
+          onclick="loginVerification()"
+        />
+        <p class="user-login">
+          New to Registry ?
+          <a class="user-login-redirect" onclick="redirectSignUp()"
+            >Signup Here</a
+          >
+        </p>
+        <p class="user-login">
+          Login as Admin ?
+          <a class="user-login-redirect" href="./admin.html">Click Here</a>
+        </p>
+      </div>
+    </div>
+    <div class="todo-dashboard" id="todo-dashboard">
+      <div class="navbar" id="navbar">
+        <div class="dashboard-heading">
+          <i class="fa fa-light fa-clipboard-list logo-icon"></i>
+          Customer Care Registry
+        </div>
+        <div class="profile-date-section">
+          <div class="profile-card-section">
+            <img
+              src="./assets/profile-icon.jpg"
+              alt="profile-icon"
+              class="profile-icon"
+              title="User-Profile"
+              id="profile-icon"
+            />
+            <div class="sub-menu-wrap">
+              <div class="sub-menu" id="profile-bar">
+                <div class="user-info">
+                  <img src="./assets/profile-icon.jpg" alt="Profile Image" />
+                  <div>
+                    <h2 id="logged-username" class="profile-user-name">Name</h2>
+                    <h4 id="logged-usertype" class="profile-user-type"></h4>
+                  </div>
+                </div>
+                <hr />
+                <div class="delete-account" id="delete-account">
+                  Delete Account
+                </div>
+                <div class="logout" id="logout">Logout</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="live-date-time">
+            <span class="current-time" id="current-time" title="Live Time"
+              >12:38 PM</span
+            >
+            <span class="current-date" id="current-date" title="Live Date"
+              >11/08/2022</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="todo-container" id="todo-container">
+        <div id="dashboard-snackbar" class="snackbar">
+          <span id="deleted-message"
+            >Login successful.. Feel free to contact</span
+          >
+          <button class="snackbar-close" id="dashboard-snackbar-close">
+            X
+          </button>
+        </div>
+        <div id="updated-snackbar" class="snackbar">
+          <span>Query Updated Successfully</span>
+          <button class="snackbar-close" id="updated-snackbar-close">X</button>
+        </div>
+        <div class="filter-bar">
+          <input
+            type="search"
+            placeholder="search using Query name.."
+            name="Filter"
+            class="filter-container"
+            id="filter-tasks"
+            onsearch="onSearch()"
+            spellcheck="false"
+          />
+          <button type="submit" class="search-button" onclick="searchButton()">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <ul class="list"></ul>
+        <div class="task-buckets">
+          <div class="todo-bucket">
+            <div class="todo-button">
+              <div class="todo-heading">📬 My Queries</div>
+              <div class="sort-category-buttons">
+                <button class="sort-button" onclick="SortClicked('New')">
+                  SORT
+                  <img
+                    src="./assets/sort-arrow-icon.png"
+                    alt="Sort Arrow Icon"
+                    class="sort-arrow"
+                  />
+                </button>
+                <div class="sort-category todo-category" id="todo-sort">
+                  <button
+                    class="category-buttons"
+                    name="todo-alphabet-ascending"
+                    onclick="sortCardsBasedOnCriteria('New', 'alphabet')"
+                  >
+                    Alphabet
+                    <i class="fa fa-sort-alpha-asc" id="todo-alphabet"></i>
+                  </button>
+                  <button
+                    class="category-buttons"
+                    onclick="sortCardsBasedOnCriteria('New','start-date')"
+                  >
+                    Start Date<i
+                      class="fa fa-light fa-arrow-down-1-9"
+                      id="todo-start-date"
+                    ></i>
+                  </button>
+                  <button
+                    class="category-buttons"
+                    onclick="sortCardsBasedOnCriteria('New','none')"
+                  >
+                    None
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button class="add-task-button" id="todo-add-task">
+              + Register New Query
+            </button>
+            <div class="todo-cards" id="todo-cards"></div>
+          </div>
+        </div>
+      </div>
+      <div class="confirmation-alert" id="confirm-delete-account">
+        <div class="delete-modal-content">
+          <span class="delete-close-button" id="delete-close-button">X</span>
+          <div>
+            <i class="fa fa-solid fa-circle-xmark danger-xmark"></i>
+          </div>
+          <div
+            class="delete-confirmation-message"
+            id="delete-confirmation-message"
+          ></div>
+          <div class="delete-confirmation">
+            <div id="delete-confirm" class="delete-confirm">Confirm</div>
+            <div id="delete-cancel" class="delete-cancel">Cancel</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal">
+        <div class="modal-content">
+          <div id="task-snackbar" class="snackbar"></div>
+          <span class="close-button">X</span>
+          <section id="add-transaction" class="add-transaction">
+            <div id="new-transaction">
+              <div class="high-light">Register Complaint</div>
+              <br />
+              <label class="high-light modal-label" for="task-name"
+                >Enter Topic</label
+              ><br />
+              <input id="task-name" type="text" class="task-input" /><br />
+              <label class="high-light modal-label">Select Type</label><br />
+              <select name="Priority" id="todo-priority" class="task-input">
+                <option value="Hardware">Hardware</option>
+                <option value="Software">Software</option>
+                <option value="Other">Other</option>
+              </select>
+              <label class="high-light modal-label" for="description"
+                >Address</label
+              ><br />
+              <textarea
+                id="address"
+                name="description"
+                type="text"
+                rows="4"
+                cols="50"
+                class="task-input description"
+              ></textarea>
+              <br />
+              <label class="high-light modal-label" for="description"
+                >Complaint Description</label
+              ><br />
+              <textarea
+                id="description"
+                name="description"
+                type="text"
+                rows="4"
+                cols="50"
+                class="task-input description"
+              ></textarea>
+              <br />
+              <div class="mandatory-message">* Mandatory fields</div>
+              <div class="save-entry">
+                <div>
+                  <input
+                    type="submit"
+                    value="Add Task"
+                    class="add-button"
+                    id="add-task"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="button"
+                    value="Cancel"
+                    class="add-cancel-button"
+                    id="task-cancel-button"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="view-task-modal">
+        <div class="modal-content">
+          <div id="task-snackbar" class="snackbar"></div>
+          <span class="close-button" id="close-view-task">X</span>
+          <section id="add-transaction" class="add-transaction">
+            <div id="new-transaction-1">
+              <div class="high-light modal-label-1">Query Name</div>
+              <div
+                id="view-task-name"
+                class="view-task-details task-heading-name"
+              ></div>
+              <div class="high-light modal-label-1">Query Type</div>
+              <div
+                id="view-priority"
+                class="view-task-details view-task-details-small view-task-progress"
+              ></div>
+              <div class="high-light modal-label-1">Query Progress</div>
+              <div
+                id="view-progress"
+                class="view-task-details view-task-details-small"
+              ></div>
+              <div class="high-light modal-label-1 description-label">
+                Address
+              </div>
+              <textarea
+                id="view-adddress"
+                name="view-adddress"
+                type="text"
+                rows="4"
+                cols="50"
+                disabled="disabled"
+                class="view-description"
+              ></textarea>
+              <div class="high-light modal-label-1 description-label">
+                Complaint Description
+              </div>
+              <textarea
+                id="view-description"
+                name="view-description"
+                type="text"
+                rows="4"
+                cols="50"
+                disabled="disabled"
+                class="view-description"
+              ></textarea>
+            </div>
+            <div class="save-entry">
+              <div>
+                <input
+                  type="submit"
+                  value="Edit"
+                  class="add-button"
+                  id="edit-view-task-modal"
+                />
+              </div>
+              <div>
+                <input
+                  type="button"
+                  value="Close"
+                  class="add-cancel-button"
+                  id="close-view-task-modal"
+                />
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="edit-task-modal" id="update-task-modal">
+        <div class="modal-content">
+          <div id="task-snackbar" class="snackbar"></div>
+          <span class="close-button" id="close-edit-task">X</span>
+          <section id="add-transaction" class="add-transaction">
+            <div id="new-transaction-1">
+              <div class="high-light">Update Query</div>
+              <div class="high-light modal-label">Query Name</div>
+              <input type="text" id="edit-task-name" class="task-input" />
+              <div class="high-light modal-label">Query Type</div>
+              <select name="Priority" id="edit-priority" class="task-input">
+                <option value="Hardware">Hardware</option>
+                <option value="Software">Software</option>
+                <option value="None">None</option>
+              </select>
+              <div class="high-light modal-label">Query Progress</div>
+              <input type="text" id="edit-progress" class="task-input" />
+              <div class="high-light modal-label">Address</div>
+              <textarea
+                id="edit-address"
+                name="edit-address"
+                type="text"
+                rows="4"
+                cols="50"
+                class="task-input description"
+              ></textarea>
+              <div class="high-light modal-label">Query Description</div>
+              <textarea
+                id="edit-description"
+                name="edit-description"
+                type="text"
+                rows="4"
+                cols="50"
+                class="task-input description"
+              ></textarea>
+            </div>
+            <div class="save-entry">
+              <div>
+                <input
+                  type="submit"
+                  value="Update"
+                  class="add-button"
+                  id="update-view-task-modal"
+                />
+              </div>
+              <div>
+                <input
+                  type="button"
+                  value="Cancel"
+                  class="add-cancel-button"
+                  id="close-edit-task-modal"
+                />
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="delete-modal" id="exit-window">
+        <div class="modal-content">
+          <div id="task-snackbar" class="snackbar"></div>
+          <span class="close-button" id="close-delete-task">X</span>
+          <section id="add-transaction" class="add-transaction">
+            <div class="danger-alert-icon">
+              <i class="fa fa-exclamation-circle delete-confirm-icon"></i>
+            </div>
+            <div class="user-alert">Are you Sure ?</div>
+            <div id="delete-task" class="alert-msg"></div>
+            <div class="user-control">
+              <div
+                class="yes-button"
+                onclick="confirmDeleteTask()"
+                id="conform-delete"
+              >
+                Confirm
+              </div>
+              <div
+                class="no-button"
+                onclick="closeDeleteConfirmation()"
+                id="conform-cancel"
+              >
+                Cancel
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="./scripts/start-page.js"></script>
+    <script type="text/javascript" src="./scripts/web-api.js"></script>
+    <script type="text/javascript" src="./scripts/dashboard.js"></script>
+    <script type="text/javascript" src="./scripts/profile.js"></script>
+    <script type="text/javascript" src="./scripts/sort.js"></script>
+  </body>
+</html>
